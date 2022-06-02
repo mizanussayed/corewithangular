@@ -1,0 +1,67 @@
+<div class="py-3 m-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h3 class="text-center">Session Information</h3>
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <th>SL Number</th>
+                    <th>Session Name</th>
+                    <th>First of Month</th>
+                    <th>Manager Name</th>
+                    <th>Card Number</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let m of getData()">
+                        <td>{{m.sessionNumber}}</td>
+                        <td>{{m.sessionName}}</td>
+                        <td class="text-center"> <input type="checkbox" [checked]="m.firstOfMonth" disabled/></td>
+                        <td>{{m.managerName}}</td>
+                        <td>{{m.cardNumber}}</td>
+                        <td>
+                            <button class="btn btn-warning" (click)="updateClick(m)">Edit</button> &nbsp;
+                            <button class="btn btn-danger" (click)="deleteClick(m.sessionNumber)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-4 mx-auto">
+            <h3 *ngIf="editting" class="text-center">Editting member info</h3>
+            <h3 *ngIf="!editting" class="text-center">Add New Session </h3>
+            <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                <div class="form-group">
+                    <label class="form-label">Session Number</label>
+                    <input class="form-control" [(ngModel)]="formData.sessionNumber" name="sessionNumber" required
+                        type="number" [disabled]="editting" [class.bg-dark]="editting">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Session Name</label>
+                    <input class="form-control" [(ngModel)]="formData.sessionName" name="sessionName" required placeholder="ex: March-First-22">
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" [(ngModel)]="formData.firstOfMonth" name="firstOfMonth" type="checkbox" id="ck">
+                    <label class="form-check-label" for="ck">First of Month</label>
+                </div><br>
+
+                <div class="form-group">
+                    <label class="form-label">Manager Name</label>
+                    <input class="form-control" [(ngModel)]="formData.managerName" name="managerName">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Card Number</label>
+                    <input class="form-control" [(ngModel)]="formData.cardNumber" name="cardNumber" type="number">
+                </div>
+                <button type="submit" class="btn btn-info btn-large">{{editting? 'Update': 'Send'}}</button>
+                &nbsp;&nbsp; &nbsp; &nbsp; 
+                <button type="reset" class="btn btn-info btn-large ">Reset</button> &nbsp;&nbsp; 
+                &nbsp;&nbsp; &nbsp; &nbsp;
+                <button type="button" class="btn btn-secondary" routerLink="/">Go to member list...</button>
+            </form>
+        </div>
+    </div>
+</div>

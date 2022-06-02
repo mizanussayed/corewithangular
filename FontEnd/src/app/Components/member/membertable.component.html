@@ -1,0 +1,41 @@
+<div class="py-3 m-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-center">Member Information</h3>
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <th>CardNumber</th>
+                    <th>Name</th>
+                    <th>BloodGroup</th>
+                    <th>RoomNumber</th>
+                    <th>Block</th>
+                    <th>Session</th>
+                    <th>Year</th>
+                    <th>Department</th>
+                    <th>PhoneNumber</th>
+                    <th>Picture</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let m of getMembers()">
+                        <td>{{m.cardNumber}}</td>
+                        <td>{{m.name}}</td>
+                        <td>{{m.bloodGroup}}</td>
+                        <td>{{m.roomNumber}}</td>
+                        <td>{{m.block}}</td>
+                        <td>{{m.session}}</td>
+                        <td>{{m.year}}</td>
+                        <td>{{m.department}}</td>
+                        <td>{{m.phoneNumber}}</td>
+                        <td><img src="{{m.picture}}" width="80" height="80"></td>
+                        <td>
+                            <button class="btn btn-warning" [routerLink]="['edit/', m.cardNumber]">Edit</button>  &nbsp;&nbsp;
+                             <button class="btn btn-danger"  (click)="deleteMember(m.cardNumber)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary" routerLink="create">Add New Member</button>
+        </div>
+    </div>
+</div>
