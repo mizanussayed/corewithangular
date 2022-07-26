@@ -1,0 +1,69 @@
+<div class="row t-3 mt-5">
+    <div class="col-md-8 mx-auto">
+        <h3 *ngIf="edditing" class="text-center">Editting member info</h3>
+        <h3  *ngIf="!edditing" class="text-center">Add New Member</h3>
+        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+            <div class="form-group">
+                <label class="form-label">Card Number</label>
+                <input class="form-control" [(ngModel)]="formData.cardNumber" name="cardNumber" #card="ngModel" required="true" pattern="^[0-9]+$">
+                <span *ngIf="card.dirty &&card.errors?.['required']"> Card Number is required</span>
+                <span *ngIf="card.dirty && card.errors?.['pattern']">Card Must be Numaric</span>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Name</label>
+                <input class="form-control" [(ngModel)]="formData.name" name="name" pattern="^[A-Za-z]+$" #name="ngModel" required="true">
+                <span *ngIf="name.dirty && card.errors?.['pattern']"> Name Must alphabet</span>
+                <span *ngIf="name.dirty &&name.errors?.['required']"> Card Number is required</span>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Blood Group</label>
+                <select class="form-control" #ss name="bloodGroup" (change)="formData.bloodGroup=ss.value">
+                     <option disabled selected>Select Blood Group.....</option>
+                     <option *ngFor=" let b of bGroup" ngValue="{{b}}">{{b}}</option>   
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Room Number</label>
+                <input class="form-control" [(ngModel)]="formData.roomNumber" name="roomNumber" #room="ngModel" min="2000" max="11000">
+                <span *ngIf="room.dirty&&room.invalid">Romm Number must between 2000 to 1100</span>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Block</label>
+                <select class="form-control" #bk (change)="formData.block=bk.value" name="block" required>
+                    <option disabled selected>Select Block .....</option>
+                    <option value="Padma">Padma</option>
+                    <option value="Meghna">Meghna</option>
+                    <option value="Jamuna">Jamuna</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Session</label>
+                <input class="form-control" [(ngModel)]="formData.session" name="session" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Year</label>
+                <input class="form-control" [(ngModel)]="formData.year" name="year">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Department</label>
+                <input class="form-control" [(ngModel)]="formData.department" name="department">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input class="form-control" [(ngModel)]="formData.phoneNumber" name="phoneNumber" #phone="ngModel">
+            </div>
+            <div class="form-group">
+                <img src="{{formData.picture}}" height="100" width="150" style="margin-right: 50px;" />
+               <!-- <label class="form-label" for="imglbl">
+                    <img [src]="iconUrl" height="50" width="50"> Click to Upload
+                </label>-->
+                <!-- <input class="form-control" [(ngModel)]="formData.picture" name="picture" #picture="ngModel"> -->
+                <input  class="form-control col-md-6" name="picture"  type="file" (change)="handleFile($event)" accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-info btn-large">{{edditing? 'Update': 'Send'}}</button>  &nbsp;&nbsp; &nbsp; &nbsp;  &nbsp;&nbsp; &nbsp; &nbsp;
+            <button type="reset" class="btn btn-info btn-large ">Reset</button>  &nbsp;&nbsp; &nbsp; &nbsp;  &nbsp;&nbsp; &nbsp; &nbsp;
+            <button type="button" class="btn btn-secondary" routerLink="/">Go to member list...</button>
+        </form>
+        
+    </div>
+</div>

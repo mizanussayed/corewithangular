@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    min-height: 10vh;
+    background-color: rgb(227, 147, 223) !important;
+}
+.table-bottom{
+    position:relative;
+    bottom: -100px !important;
+}
+
+svg{
+    margin-top: -100px !important
+}
+
+a{
+    color:wheat !important;
+}
+
+nav{
+    padding-left: 45px !important;
+    padding-right: 40px !important;
+}
